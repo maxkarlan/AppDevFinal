@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   # READ
   get("/users", {:controller => "users", :action => "index"})
   get("/users/:the_username", {:controller => "users", :action => "show"})
+  get("/activity/:the_wallet_address", { :controller => "users", :action => "show_activity"})
 
   # UPDATE
   get("/update_user/:the_user_id", {:controller => "users", :action => "update" })
@@ -26,6 +27,6 @@ Rails.application.routes.draw do
   get("/delete_user/:the_user_id", {:controller => "users", :action => "destroy"})
 
   # ADD/REMOVE WALLETS
-  get("/user_add_wallet/:the_user_id", { :controller => "wallets", :action => "add_wallet"})
+  get("/user_add_wallet/:the_user_id", { :controller => "users", :action => "add_wallet"})
 
 end

@@ -52,22 +52,22 @@ class UsersController < ApplicationController
     the_username = params.fetch("the_username")
     @user = User.where({ :username => the_username }).at(0)
 
-    ## Looks Rare API
+      ## Looks Rare API
 
-    url = URI("https://api.looksrare.org/api/v1/accounts?address=#{@user.wallet_address}")
+      url = URI("https://api.looksrare.org/api/v1/accounts?address=#{@user.wallet_address}")
 
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-
-    request = Net::HTTP::Get.new(url)
-    request["accept"] = 'application/json'
-
-    response = http.request(request)
-    puts response.read_body
-
-    raw_data = open(url).read
-    @parsed_data = JSON.parse(raw_data) 
-
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = true
+  
+      request = Net::HTTP::Get.new(url)
+      request["accept"] = 'application/json'
+  
+      response = http.request(request)
+      puts response.read_body
+  
+      raw_data = open(url).read
+      @parsed_data = JSON.parse(raw_data) 
+  
     render({ :template => "users/show.html.erb" })
   end
 
@@ -126,4 +126,5 @@ class UsersController < ApplicationController
   end
 
   def add_wallet
+  end
 end
