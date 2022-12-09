@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       if user.authenticate(pw)
         session.store( :user_id, user.id)
         
-        redirect_to("/", { :notice => "Welcome back, " + user.username})
+        redirect_to("/users/#{user.username}", { :notice => "Welcome back, " + user.username})
       else
         redirect_to("/user_sign_in", { :alert => "Try again"})
       end
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all.order({ :username => :asc })
 
-    render({ :template => "users/index.html" })
+    render({ :template => "users/index.html.erb" })
   end
 
   def show
@@ -70,8 +70,9 @@ class UsersController < ApplicationController
     the_id = params.fetch("the_user_id")
     user = User.where({ :id => the_id }).at(0)
 
-
     user.username = params.fetch("input_username")
+
+    user.wallet_address = params.fetch("input_wallet_address")
 
     user.save
     
@@ -87,4 +88,10 @@ class UsersController < ApplicationController
     redirect_to("/users")
   end
 
+  def update_settings
+    the_username = session.fetch( :username)
+    @user = User.where({ :username => the_username }).at(0)
+
+    render({ :template => "users/settings.html.erb"})
+  end
 end

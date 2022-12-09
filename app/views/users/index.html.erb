@@ -1,0 +1,40 @@
+<h1>All Profiles</h1>
+
+<table border="1">
+  <tr>
+    <th>
+      ID
+    </th>
+
+    <th>
+      Username
+    </th>
+
+    <th>
+      Wallet Address
+    </th>
+
+    <th></th>
+  </tr>
+
+  <% @users.each do |user| %>
+  <tr>
+    <td>
+      <%= user.id %>
+    </td>
+
+    <td>
+      <%= user.username %>
+    </td>
+
+    <td>
+      <%= user.wallet_address %>
+    </td>
+
+    <td>
+      <a href="/users/<%= user.username %>">Show details</a>
+    </td>
+  </tr>
+  
+  <% end %>
+</table>

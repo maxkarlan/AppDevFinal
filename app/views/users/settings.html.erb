@@ -1,0 +1,16 @@
+
+<dl>
+  <dt>Edit username and wallet address</dt>
+  <dd>
+    <form action="/update_user/<%= session.fetch( :user_id) %>" >
+      <label for="browser_username">Username</label>
+      <input id="browser_username" type="text" name="input_username" placeholder="Enter new username..." value="<%= session.fetch( :username) %>">
+
+      <label for="wallet_address">Wallet address</label>
+      <input id="wallet_address" type="text" name="input_wallet_address" placeholder="Enter new Ethereum address..." value="<%= session.fetch( :wallet_address) %>">
+
+
+      <button>Update Profile</button>
+    </form>
+  </dd>
+</dl>
