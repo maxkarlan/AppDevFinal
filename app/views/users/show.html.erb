@@ -25,4 +25,21 @@
 
 </dl>
 
+<% if @user.id == session.fetch( :user_id) %>
+
+<dl>
+  <dt>Add additional wallet to profile</dt>
+  <dd>
+    <form action="/user_add_wallet/<%= @user.username %>" >
+      <label for="new_wallet_addition">Wallet address</label>
+      <input id="new_wallet_addition" type="text" name="input_alt_wallet_address" placeholder="Enter new wallet..." value="<%= session.fetch( :username) %>">
+      <button>Add Wallet</button>
+    </form>
+  </dd>
+</dl>
+
+<% end %>
+
+<a href = "/user_alt_wallets/<%= @user.username %>">All user alt wallets</a>
+
 <a href = "/delete_user/<%= @user.id %>">Delete User</a>

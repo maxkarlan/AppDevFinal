@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_09_030929) do
+ActiveRecord::Schema.define(version: 2022_12_09_161653) do
+
+  create_table "alt_wallets", force: :cascade do |t|
+    t.string "username"
+    t.string "alt_wallet_address"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"

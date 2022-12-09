@@ -1,0 +1,32 @@
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Username</th>
+    <th>Alt Wallet Address</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @alt_wallets.each do |wallet| %>
+  <tr>
+    <td>
+      <%= wallet.id %>
+    </td>
+
+    <td>
+      <%= wallet.username %>
+    </td>
+
+    <td>
+      <%= wallet.alt_wallet_address %>
+    </td>
+
+    <td>
+      <a href="/users/<%= wallet.username %>">
+        Show details
+      </a>
+    </td>
+  </tr>
+  
+  <% end %>
+</table>

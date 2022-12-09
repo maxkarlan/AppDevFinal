@@ -1,7 +1,3 @@
-require 'uri'
-require 'net/http'
-require 'openssl'
-
 class UsersController < ApplicationController
 
   def authenticate
@@ -125,6 +121,17 @@ class UsersController < ApplicationController
     render({ :template => "users/settings.html.erb"})
   end
 
-  def add_wallet
-  end
+#  def add_alt_wallet
+
+#    the_id = params.fetch("the_user_id")
+ #   user = User.where({ :id => the_id }).at(0)
+
+  #  user.username = params.fetch("input_username")
+
+   # user.wallet_address = params.fetch("input_wallet_address")
+
+   # user.save
+
+   # redirect_to("/users/#{user.username}")
+  #end
 end
