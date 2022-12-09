@@ -6,12 +6,12 @@ class AltWalletsController < ApplicationController
   end
 
   def show
-    username = params.fetch("the_username")
-    @user_alt_wallets = AltWallet.all.where({ :username => username})
+    @username = params.fetch("the_username")
+    @user_alt_wallets = AltWallet.all.where({ :username => @username})
     render({ :template => "alt_wallets/user_alt_wallets.html.erb"})
   end
 
-  def add_alt_wallet
+  def create
 
     username = params.fetch("the_username")
     address = params.fetch("input_alt_wallet_address")
@@ -22,23 +22,16 @@ class AltWalletsController < ApplicationController
 
     alt_wallet.save
 
-    if save_status == true
-      session.store( :id, alt_wallet.id)
-      end
-
     redirect_to("/user_alt_wallets/#{alt_wallet.username}")
   end
 
   def destroy
-    #   username = params.fetch("the_username")
-    #   username = session.fetch( :username)
-    #   user = User.where({ :username => username }).at(0)
-       alt_wallet_id = params.fetch("alt_wallet_id")
-       alt_wallet = Wallet.where({ :id => alt_wallet_id}).at(0)
-   
-       alt_wallet.destroy
-   
-       redirect_to("/users/#{@alt_wallet.username}")
-     end
+    alt_wallet_id = params.fetch("alt_wallet_id")
+    alt_wallet = AltWallet.where({ :id => alt_wallet_id}).at(0)
+
+    alt_wallet.destroy
+
+    redirect_to("/users/#{alt_wallet.username}")
+  end
 
 end

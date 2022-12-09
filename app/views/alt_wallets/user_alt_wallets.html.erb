@@ -1,1 +1,35 @@
-hi
+
+<h1><%= @username %>'s Alt Wallets</h1>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Alt Wallet Address</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @user_alt_wallets.each do |wallet| %>
+  <tr>
+    <td>
+      <%= wallet.id %>
+    </td>
+    <td>
+      <%= wallet.alt_wallet_address %>
+    </td>
+
+    <td>
+      <a href="/users/<%= wallet.username %>">
+        Show details
+      </a>
+    </td>
+
+    <% if wallet.username == @username %>
+      <td>
+        <a href = "/user_delete_wallet/<%= wallet.id %>">Delete Wallet</a>
+      </td>
+    <% end %>
+
+  </tr>
+  
+  <% end %>
+</table>

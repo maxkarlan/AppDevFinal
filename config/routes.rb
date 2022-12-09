@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get("/delete_user/:the_user_id", {:controller => "users", :action => "destroy"})
 
   # ADD/REMOVE WALLETS
-  get("/user_add_wallet/:the_username", { :controller => "alt_wallets", :action => "add_alt_wallet"})
-  get("/user_delete_wallet/:alt_wallet_id", { :controller => "alt_wallets", :action => "delete_alt_wallet"})
+  get("/user_add_wallet/:the_username", { :controller => "alt_wallets", :action => "create"})
+  get("/user_delete_wallet/:alt_wallet_id", { :controller => "alt_wallets", :action => "destroy"})
 
 end
