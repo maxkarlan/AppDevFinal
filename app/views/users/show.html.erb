@@ -1,1 +1,53 @@
-<h1><%= @user.username %> Gallery</h1>
+<h1><%= @user.username %> NFT transfers</h1>
+
+<dl>
+  <dt>Main Wallet Address</dt>
+  <dd><%= @user.wallet_address %></dd>
+
+  <dt>Biography</dt>
+  <dd><%= @parsed_data.fetch("data").fetch("biography") %></dd>
+
+  <dt>Personal Website</dt>
+  <dd><%= @parsed_data.fetch("data").fetch("websiteLink") %></dd>
+
+  <dt>Twitter </dt>
+  <dd><%= @parsed_data.fetch("data").fetch("twitterLink") %></dd>
+</dl>
+
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Wallet Address</th>
+    <th></th>
+  </tr>
+
+  <% @user_wallets.each do |wallet| %>
+  <tr>
+    <td>
+      <%= wallet.id %>>
+    </td>
+
+    <td>
+      <%= wallet.n %>
+    </td>
+
+    <td>
+      <%= photo.poster.username %>
+    </td>
+
+    <td>
+      <%= photo.created_at %>
+    </td>
+
+    <td>
+      <a href="/photos/<%= photo.id %>">
+        Show details
+      </a>
+    </td>
+  </tr>
+  
+  <% end %>
+</table>
+
+
+<a href = "/delete_user/<%= @user.id %>">Delete User</a>

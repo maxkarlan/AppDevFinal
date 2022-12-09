@@ -1,3 +1,7 @@
+require 'uri'
+require 'net/http'
+require 'openssl'
+
 class UsersController < ApplicationController
 
   def authenticate
@@ -22,7 +26,7 @@ class UsersController < ApplicationController
   def sign_out
     reset_session
 
-    redirect_to("/", { :notice => "See ya later!" })
+    redirect_to("/")
   end
 
   def new_registration_form
@@ -42,16 +46,37 @@ class UsersController < ApplicationController
   end
 
   def show
+
+    ## User verification
+
     the_username = params.fetch("the_username")
     @user = User.where({ :username => the_username }).at(0)
+
+    ## Looks Rare API
+
+    url = URI("https://api.looksrare.org/api/v1/accounts?address=#{@user.wallet_address}")
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Get.new(url)
+    request["accept"] = 'application/json'
+
+    response = http.request(request)
+    puts response.read_body
+
+    raw_data = open(url).read
+    @parsed_data = JSON.parse(raw_data) 
 
     render({ :template => "users/show.html.erb" })
   end
 
   def create
+
     user = User.new
 
     user.username = params.fetch("input_username")
+    user.wallet_address = params.fetch("input_wallet_address")
     user.password = params.fetch("input_password")
     user.password_confirmation = params.fetch("input_password_confirmation")
 
@@ -80,10 +105,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    username = params.fetch("the_username")
-    user = User.where({ :username => username }).at(0)
+ #   username = params.fetch("the_username")
+ #   username = session.fetch( :username)
+ #   user = User.where({ :username => username }).at(0)
+    user_id = params.fetch("the_user_id")
+    user = User.where({ :id => user_id}).at(0)
 
     user.destroy
+
+    reset_session
 
     redirect_to("/users")
   end
@@ -94,4 +124,6 @@ class UsersController < ApplicationController
 
     render({ :template => "users/settings.html.erb"})
   end
+
+  def add_wallet
 end

@@ -1,0 +1,35 @@
+<h1>List of wallets</h1>
+
+<hr>
+
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Wallet Address</th>
+    <th>Owner</th>
+    <th></th>
+  </tr>
+
+  <% @wallets.each do |wallet| %>
+  <tr>
+    <td>
+      <%= wallet.id %>">
+    </td>
+
+    <td>
+      <%= wallet.address %>
+    </td>
+
+    <td>
+      <%= wallet.username %>
+    </td>
+    
+    <td>
+      <a href="/photos/<%= photo.id %>">
+        Show details
+      </a>
+    </td>
+  </tr>
+  
+  <% end %>
+</table>
